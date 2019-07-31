@@ -1,0 +1,9 @@
+.PeopleDetails {
+  background: #212121;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 32px;
+}
