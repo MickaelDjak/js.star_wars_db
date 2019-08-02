@@ -8,17 +8,23 @@
 .Header-logo {
   color: #ffeb3b;
   font-weight: 900;
-  font-size: 2em;
+  font-size: 3em;
   margin-right: 50px;
 }
 
 .Header-navigation > button {
   color: #ffeb3b;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   outline: none;
   width: 100px;
   font-weight: 700;
+  transition: all 500ms;
+}
+
+.Header-navigation > button:hover {
+  border-bottom: 1px solid #ffeb3b;
+  transform: scale(1.2);
 }
 
 @media screen and (max-width: 769px) {
