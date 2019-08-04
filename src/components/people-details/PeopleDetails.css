@@ -3,12 +3,20 @@
   margin-bottom: 2rem;
   border-radius: 0.3rem;
   display: flex;
-  flex-direction: column;
-  padding: 16px 32px;
+  flex-direction: row;
 }
 
-
-.PeopleDetails img {
+.PeopleDetails-image {
   width: 300px;
   height: auto;
+}
+
+.PeopleDetails-info {
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.PeopleDetails-info > * {
+  margin-bottom: 0;
 }
