@@ -6,10 +6,15 @@
 }
 
 .Header-logo {
-  color: #ffeb3b;
-  font-weight: 900;
-  font-size: 3em;
+  font-size: 2em;
   margin-right: 50px;
+  font-family: "Star Jedi", arial;
+  color: #000000;
+  text-shadow: -0 -1px 0 #ffeb3b, 0 -1px 0 #ffeb3b, -0 1px 0 #ffeb3b,
+    0 1px 0 #ffeb3b, -1px -0 0 #ffeb3b, 1px -0 0 #ffeb3b, -1px 0 0 #ffeb3b,
+    1px 0 0 #ffeb3b, -1px -1px 0 #ffeb3b, 1px -1px 0 #ffeb3b, -1px 1px 0 #ffeb3b,
+    1px 1px 0 #ffeb3b, -1px -1px 0 #ffeb3b, 1px -1px 0 #ffeb3b,
+    -1px 1px 0 #ffeb3b, 1px 1px 0 #ffeb3b;
 }
 
 .Header-navigation > button {
@@ -23,6 +28,7 @@
 }
 
 .Header-navigation > button:hover {
+  border-top: 1px solid #ffeb3b;
   border-bottom: 1px solid #ffeb3b;
   transform: scale(1.2);
 }

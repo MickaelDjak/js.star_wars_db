@@ -1,19 +1,47 @@
 import React, { Component } from "react";
+import SwapiService from "../../services/SwapiService";
 import "./PeopleDetails.css";
 
 export default class PeopleDetails extends Component {
+  swapi = new SwapiService();
+
+  state = {
+    entity: {}
+  };
+
+  onUpdateEntity = entity => {
+    this.setState({
+      entity: entity
+    });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    console.log("PeopleDetails  componentDidMount");
+    this.swapi
+      .getPerson(nextProps.selectedEntityId)
+      .then(this.onUpdateEntity)
+      .catch(e => {});
+  }
+
   render() {
+    const key = Object.keys(this.state.entity);
+    const img = this.state.entity.name ? (
+      <img src={this.state.entity.imageUrl} alt=";" />
+    ) : null;
+    
     return (
-      <div className='PeopleDetails'>
-        <blockquote className="blockquote">
-          <p className="mb-0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-            posuere erat a ante.
-          </p>
-          <footer className="blockquote-footer">
-            Someone famous in <cite title="Source Title">Source Title</cite>
-          </footer>
-        </blockquote>
+      <div className="PeopleDetails">
+        {img}
+        {key.map(name => {
+          return (
+            <p key={name}>
+              <span className="RandomPlanet-term  font-weight-bold">
+                {name}
+              </span>
+              <span className="text-muted">{this.state.entity[`${name}`]}</span>
+            </p>
+          );
+        })}
       </div>
     );
   }

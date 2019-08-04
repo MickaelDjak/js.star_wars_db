@@ -3,11 +3,21 @@ import Header from "./../header";
 import RandomPlanet from "./../random-planet";
 import ItemList from "./../item-list";
 import PeopleDetails from "./../people-details";
-
 import "./App.css";
 
 export default class App extends Component {
+  state = {
+    selectedEntityId: null
+  };
+
+  onSelect = id => {
+    this.setState({
+      selectedEntityId: id
+    });
+  };
+
   render() {
+    
     return (
       <div className="App container">
         <div className="row">
@@ -24,11 +34,11 @@ export default class App extends Component {
 
         <div className="row">
           <div className="col-3">
-            <ItemList />
+            <ItemList onSelect={this.onSelect} />
           </div>
 
           <div className="col-9">
-            <PeopleDetails />
+            <PeopleDetails selectedEntityId={this.state.selectedEntityId} />
           </div>
         </div>
       </div>

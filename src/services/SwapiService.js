@@ -1,6 +1,8 @@
 export default class SwapiService {
   _apiBase = "https://swapi.co/api/";
 
+  _apiImageBase = "https://starwars-visualguide.com/assets/img/";
+
   async getResource(url) {
     const res = await fetch(`${this._apiBase}${url}`);
     if (res.ok === false) {
@@ -46,19 +48,24 @@ export default class SwapiService {
     return this._transformStarship(starship);
   }
 
-  _transformPlanet(planet) {
+  _transformPlanet = planet => {
+    const id = this._getIdBuUrl(planet.url);
+
     return {
-      id: this._getIdBuUrl(planet.url),
+      id: id,
       name: planet.name,
       population: planet.population,
       diameter: planet.diameter,
-      orbitalPeriod: planet.orbital_period
+      orbitalPeriod: planet.orbital_period,
+      imageUrl: this._getImageUrl("planets", id)
     };
-  }
+  };
 
-  _transformStarship(starship) {
+  _transformStarship = starship => {
+    const id = this._getIdBuUrl(starship.url);
+
     return {
-      id: this._getIdBuUrl(starship.url),
+      id: id,
       MGLT: starship.MGLT,
       cargoCapacity: starship.cargo_capacity,
       consumables: starship.consumables,
@@ -73,13 +80,16 @@ export default class SwapiService {
       model: starship.model,
       name: starship.name,
       passengers: starship.passengers,
-      starshipClass: starship.starship_class
+      starshipClass: starship.starship_class,
+      imageUrl: this._getImageUrl("starships", id)
     };
-  }
+  };
 
-  _transformPerson(person) {
+  _transformPerson = person => {
+    const id = this._getIdBuUrl(person.url);
+
     return {
-      id: this._getIdBuUrl(person.url),
+      id: id,
       birthYear: person.birth_year,
       eyeColor: person.eye_color,
       gender: person.gender,
@@ -89,15 +99,20 @@ export default class SwapiService {
       name: person.name,
       skinColor: person.skin_color,
       created: person.created,
-      edited: person.edited
+      edited: person.edited,
+      imageUrl: this._getImageUrl("characters", id)
     };
-  }
+  };
 
-  _getIdBuUrl(url) {
+  _getIdBuUrl = url => {
     const regex = /\/(\d*)\/$/;
     const id = url.match(regex)[1];
     return id;
-  }
+  };
+
+  _getImageUrl = (entityName, id) => {
+    return `${this._apiImageBase}${entityName}/${id}.jpg`;
+  };
 }
 
 // const ss = new SwapiService();

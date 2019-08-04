@@ -1,84 +1,70 @@
 import React, { Component } from "react";
 import SwapiService from "./../../services/SwapiService";
 import Spinner from "./../spinner";
+import ErrorIndicator from "./../error-indicator";
+import PlanetView from "./PlanetView";
 import "./RandomPlanet.css";
 
 export default class RandomPlanet extends Component {
   swapiServise = new SwapiService();
 
+  timer;
+
   state = {
     planet: {},
-    loading: true
+    loading: true,
+    error: false
   };
 
   constructor() {
     super();
     this.updatePlanet();
-    // setInterval(this.updatePlanet, 3000);
   }
 
-  // componentDidMount() {
-  //   setInterval(this.updatePlanet, 3000);
-  // }
+  componentDidMount() {
+    this.timer = setInterval(this.updatePlanet, 4000);
+  }
 
-  updatePlanet = () => {
-    const id = Math.floor(Math.random() * 25) + 2;
-    this.swapiServise.getPlanet(id).then(planet => {
-      this.setState({
-        planet: planet,
-        loading: false
-      });
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  onPlanetLoaded = planet => {
+    this.setState({
+      planet: planet,
+      loading: false
     });
   };
 
+  onError = () => {
+    this.setState({
+      loading: false,
+      error: true
+    });
+  };
+
+  updatePlanet = () => {
+    const id = Math.floor(Math.random() * 25) + 1;
+
+    this.swapiServise
+      .getPlanet(id)
+      .then(this.onPlanetLoaded)
+      .catch(this.onError);
+  };
+
   render() {
-    const {
-      planet: { id, name, population, diameter, orbitalPeriod },
-      loading
-    } = this.state;
-    if (loading) {
-      return (
-        <div className="RandomPlanet">
-          <Spinner />
-        </div>
-      );
-    } else {
-      const imgUrl = id
-        ? `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`
-        : "https://starwars-visualguide.com/assets/img/big-placeholder.jpg";
+    const { planet, loading, error } = this.state;
+    const spinner = loading ? <Spinner /> : null;
+    const errorIndicator = error ? <ErrorIndicator /> : null;
 
-      // const style = {
-      //   background-image: url("https://starwars-visualguide.com/assets/img/planets/4.jpg"),
-      // url("https://starwars-visualguide.com/assets/img/big-placeholder.jpg")}
-      return (
-        <div className="RandomPlanet">
-          <div className="RandomPlanet-photo">
-            <img src={imgUrl} alt="sw random planet" />
-          </div>
-          <div className="RandomPlanet-info">
-            <h1 className="display-3">{name}</h1>
+    const viewer = !(loading || error) ? <PlanetView planet={planet} /> : null;
 
-            <p>
-              <span className="RandomPlanet-term font-weight-bold">
-                Population
-              </span>
-              <span className="text-muted">{population}</span>
-            </p>
-            <p>
-              <span className="RandomPlanet-term  font-weight-bold">
-                Diameter
-              </span>
-              <span className="text-muted">{diameter}</span>
-            </p>
-            <p>
-              <span className="RandomPlanet-term  font-weight-bold">
-                Orbital period
-              </span>
-              <span className="text-muted">{orbitalPeriod}</span>
-            </p>
-          </div>
-        </div>
-      );
-    }
+    return (
+      <div className="RandomPlanet">
+        {spinner}
+        {viewer}
+        {errorIndicator}
+      </div>
+    );
   }
 }

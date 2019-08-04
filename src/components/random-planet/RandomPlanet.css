@@ -10,7 +10,6 @@
 .RandomPlanet-info p {
   display: flex;
   flex-direction: row;
-
 }
 
 .RandomPlanet-term {
@@ -19,11 +18,11 @@
 
 .RandomPlanet-photo {
   margin-right: 25px;
-}
-
-.RandomPlanet-photo > img {
   width: 250px;
-  height: auto;
+  height: 250px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; 
   transition: all 50ms;
 }
 
