@@ -4,6 +4,7 @@ import Spinner from "./../spinner";
 import ErrorIndicator from "./../error-indicator";
 import PlanetView from "./PlanetView";
 import "./RandomPlanet.css";
+import ErrorGenerator from "../error-generator/ErrorGenerator";
 
 export default class RandomPlanet extends Component {
   swapiServise = new SwapiService();
@@ -64,6 +65,7 @@ export default class RandomPlanet extends Component {
         {spinner}
         {viewer}
         {errorIndicator}
+        <ErrorGenerator />
       </div>
     );
   }

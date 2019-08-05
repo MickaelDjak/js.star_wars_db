@@ -1,23 +1,35 @@
 import React, { Component } from "react";
 import Header from "./../header";
 import RandomPlanet from "./../random-planet";
-import ItemList from "./../item-list";
-import PeopleDetails from "./../people-details";
+import ErrorIndicator from "../error-indicator";
+import PeoplePage from "../people-page/PeoplePage";
 import "./App.css";
 
 export default class App extends Component {
   state = {
-    selectedEntityId: null
+    showRandomPlanet: true,
+    hasError: false
   };
 
-  onSelect = id => {
-    this.setState({
-      selectedEntityId: id
+  toggleShowRandomPlanet = () => {
+    this.setState(({ showRandomPlanet }) => {
+      console.log(showRandomPlanet);
+      return {
+        showRandomPlanet: !showRandomPlanet
+      };
     });
   };
 
+  componentDidCatch() {
+    console.log("componentDidCatch");
+    this.setState({ hasError: true });
+  }
+
   render() {
-    
+    if (this.state.hasError) {
+      return <ErrorIndicator />;
+    }
+
     return (
       <div className="App container">
         <div className="row">
@@ -28,18 +40,30 @@ export default class App extends Component {
 
         <div className="row">
           <div className="col-12">
-            <RandomPlanet />
+            {this.state.showRandomPlanet ? <RandomPlanet /> : null}
+          </div>
+        </div>
+        <div className="row justify-content-end">
+          <div className="col-3">
+            <span
+              className="btn RandomPlanet-triger"
+              onClick={() => this.toggleShowRandomPlanet()}
+            >
+              {this.state.showRandomPlanet ? "Hide" : "Show"} random planet
+            </span>
           </div>
         </div>
 
         <div className="row">
-          <div className="col-3">
-            <ItemList onSelect={this.onSelect} />
-          </div>
+          <PeoplePage />
+        </div>
 
-          <div className="col-9">
-            <PeopleDetails selectedEntityId={this.state.selectedEntityId} />
-          </div>
+        <div className="row">
+          <PeoplePage />
+        </div>
+
+        <div className="row">
+          <PeoplePage />
         </div>
       </div>
     );
