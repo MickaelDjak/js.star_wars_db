@@ -7,7 +7,6 @@ export default class ErrorGenerator extends Component {
   };
 
   render() {
-    console.log("ErrorGenerator.render");
     if (this.state.renderError) {
       this.foo.bar = 0;
     }

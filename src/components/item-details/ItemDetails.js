@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import SwapiService from "../../services/SwapiService";
+import "./ItemDetails.css";
 import Spinner from "../spinner/spinner";
-import PeopleViewer from "./PeopleViewer";
-import "./PeopleDetails.css";
-import ErrorGenerator from "../error-generator/ErrorGenerator";
+import ItemViewer from "./ItemViewer";
+import ErrorGenerator from "../error-generator";
 
-export default class PeopleDetails extends Component {
-  swapi = new SwapiService();
-
+export default class ItemDetails extends Component {
   state = {
     entity: {},
     loading: false
@@ -17,11 +14,21 @@ export default class PeopleDetails extends Component {
     if (this.props.selectedEntityId !== prevProps.selectedEntityId) {
       this.onUpdateEntity();
     }
+
+    if (this.props.entityType !== prevProps.entityType) {
+      this.onChangeEntityType();
+    }
   }
 
   componentDidMount() {
     this.onUpdateEntity();
   }
+
+  onChangeEntityType = () => {
+    this.setState({
+      entity: {}
+    });
+  };
 
   onUpdateEntity = () => {
     const { selectedEntityId = null } = this.props;
@@ -31,7 +38,7 @@ export default class PeopleDetails extends Component {
 
     this.setState({ loading: true });
 
-    this.swapi.getPerson(selectedEntityId).then(entity => {
+    this.props.getOneItem(selectedEntityId).then(entity => {
       this.setState({
         entity: entity,
         loading: false
@@ -41,10 +48,16 @@ export default class PeopleDetails extends Component {
 
   render() {
     const { entity, loading } = this.state;
-    const content = loading ? <Spinner /> : <PeopleViewer entity={entity} />;
+    const { renderContent } = this.props;
+
+    const content = loading ? (
+      <Spinner />
+    ) : (
+      <ItemViewer entity={entity} kayList={renderContent} />
+    );
 
     return (
-      <div className="PeopleDetails">
+      <div className="ItemDetails">
         {content}
         <ErrorGenerator />
       </div>

@@ -1,4 +1,4 @@
-.PeopleDetails {
+.ItemDetails {
   background: #e6e4e4;
   margin-bottom: 2rem;
   border-radius: 0.3rem;
@@ -6,21 +6,21 @@
   flex-direction: row;
 }
 
-.PeopleDetails-empyt {
+.ItemDetails-empyt {
   padding: 16px 32px;
 }
 
-.PeopleDetails-image {
+.ItemDetails-image {
   width: 300px;
   height: auto;
 }
 
-.PeopleDetails-info {
+.ItemDetails-info {
   padding: 16px 32px;
   display: flex;
   flex-direction: column;
 }
 
-.PeopleDetails-info > * {
+.ItemDetails-info > * {
   margin-bottom: 0;
 }

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import "./RandomPlanet.css";
 import SwapiService from "./../../services/SwapiService";
 import Spinner from "./../spinner";
-import ErrorIndicator from "./../error-indicator";
 import PlanetView from "./PlanetView";
-import "./RandomPlanet.css";
-import ErrorGenerator from "../error-generator/ErrorGenerator";
+import ErrorGenerator from "../error-generator";
+import ErrorHandler from "../error-handler/ErrorHandler";
 
 export default class RandomPlanet extends Component {
   swapiServise = new SwapiService();
@@ -13,8 +13,7 @@ export default class RandomPlanet extends Component {
 
   state = {
     planet: {},
-    loading: true,
-    error: false
+    loading: true
   };
 
   constructor() {
@@ -39,8 +38,7 @@ export default class RandomPlanet extends Component {
 
   onError = () => {
     this.setState({
-      loading: false,
-      error: true
+      loading: false
     });
   };
 
@@ -54,18 +52,17 @@ export default class RandomPlanet extends Component {
   };
 
   render() {
-    const { planet, loading, error } = this.state;
+    const { planet, loading } = this.state;
     const spinner = loading ? <Spinner /> : null;
-    const errorIndicator = error ? <ErrorIndicator /> : null;
-
-    const viewer = !(loading || error) ? <PlanetView planet={planet} /> : null;
+    const viewer = !loading ? <PlanetView planet={planet} /> : null;
 
     return (
       <div className="RandomPlanet">
-        {spinner}
-        {viewer}
-        {errorIndicator}
-        <ErrorGenerator />
+        <ErrorHandler>
+          {spinner}
+          {viewer}
+          <ErrorGenerator />
+        </ErrorHandler>
       </div>
     );
   }

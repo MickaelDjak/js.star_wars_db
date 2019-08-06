@@ -1,23 +1,20 @@
 import React, { Fragment } from "react";
 
-const PeopleViewer = function({ entity }) {
-  const key = Object.keys(entity);
-
-  const img = entity.name ? (
-    <img className="PeopleDetails-image" src={entity.imageUrl} alt=";" />
-  ) : null;
-
+const ItemViewer = function({ entity, kayList }) {
   if (Object.keys(entity).length === 0) {
     return (
-      <span className="PeopleDetails-empyt">Select a person from a list </span>
+      <span className="ItemDetails-empyt">Select a person from a list </span>
     );
   }
+  const img = entity.name ? (
+    <img className="ItemDetails-image" src={entity.imageUrl} alt=";" />
+  ) : null;
 
   return (
     <Fragment>
       {img}
-      <div className="PeopleDetails-info">
-        {key.map(name => {
+      <div className="ItemDetails-info">
+        {kayList.map(name => {
           return (
             <p key={name}>
               <span className="RandomPlanet-term  font-weight-bold">
@@ -32,4 +29,4 @@ const PeopleViewer = function({ entity }) {
   );
 };
 
-export default PeopleViewer;
+export default ItemViewer;

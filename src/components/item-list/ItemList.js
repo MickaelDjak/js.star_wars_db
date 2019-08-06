@@ -1,42 +1,57 @@
 import React, { Component } from "react";
-import SwapiService from "../../services/SwapiService";
-
 import "./ItemList.css";
-import ItemListView from "./ItemListView";
 import Spinner from "../spinner/spinner";
 
 export default class ItemList extends Component {
-  swapi = new SwapiService();
-
   state = {
     entities: [],
-    selectedEntity: null
+    loading: true
   };
 
   componentDidMount() {
-    this.swapi.getAllPeople().then(this.onUpdateEntities);
+    this.props.getData().then(this.onUpdateEntities);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.entityType !== prevProps.entityType) {
+      this.setState({
+        loading: true
+      });
+      this.props.getData().then(this.onUpdateEntities);
+    }
   }
 
   onUpdateEntities = entities => {
     this.setState({
-      entities: entities
+      entities: entities,
+      loading: false
     });
   };
 
-  onError = () => {};
-
   render() {
-    const { entities } = this.state;
+    const { entities, loading } = this.state;
 
-    const content = entities.length ? (
-      <ItemListView entities={entities} onSelect={this.props.onSelect} />
-    ) : (
-      <Spinner />
-    );
+    if (loading) {
+      return <Spinner />;
+    }
 
     return (
       <div className="card mb-3">
-        <ul className="list-group list-group-flush">{content}</ul>
+        <ul className="list-group list-group-flush">
+          {entities.map(({ id, ...data }) => {
+            return (
+              <li
+                key={id}
+                className="list-group-item"
+                onClick={() => {
+                  this.props.onSelect(id);
+                }}
+              >
+                {this.props.children(data)}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
