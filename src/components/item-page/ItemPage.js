@@ -1,44 +1,40 @@
 import React, { Component } from "react";
-import ItemDetails from "../item-details/ItemDetails";
-import ItemList from "../item-list/ItemList";
+import { DataRecord } from "../item-details/ItemDetails";
 import DoubleColumnRow from "../double-column-row/DoubleColumnRow";
 import ErrorHandler from "../error-handler/ErrorHandler";
+import { PersonList, PersonDetails } from "./../sw-components";
 
 export default class ItemPage extends Component {
   render() {
     const {
       entityType,
       onSelect,
-      getAllItems,
       renderItem,
       selectedEntityId,
-      getOneItem,
       renderContent
     } = this.props;
 
     const list = (
-      <ItemList
-        entityType={entityType}
-        onSelect={onSelect}
-        getData={getAllItems}
-      >
+      <PersonList entityType={entityType} onSelect={onSelect}>
         {renderItem}
-      </ItemList>
+      </PersonList>
     );
 
-    const details = (
-      <ItemDetails
+    const details2 = (
+      <PersonDetails
         entityType={entityType}
         selectedEntityId={selectedEntityId}
-        getOneItem={getOneItem}
-        renderContent={renderContent}
-      />
+      >
+        {renderContent.map(el => {
+          return <DataRecord label={el.label} field={el.field} />;
+        })}
+      </PersonDetails>
     );
 
     return (
       <div>
         <ErrorHandler>
-          <DoubleColumnRow left={list} right={details} />
+          <DoubleColumnRow left={list} right={details2} />
         </ErrorHandler>
       </div>
     );

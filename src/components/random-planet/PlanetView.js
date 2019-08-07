@@ -1,19 +1,19 @@
 import React, { Fragment } from "react";
+import ErrorGenerator from './../error-generator';
 
 const PlanetView = function({
-  planet: { id, name, population, diameter, orbitalPeriod, imageUrl }
+  planet: { id, name, population, diameter, orbitalPeriod, imageUrl, stabImageUrl }
 }) {
-  const imgUrlDefault =
-    "https://starwars-visualguide.com/assets/img/big-placeholder.jpg";
     
   return (
     <Fragment>
       <div
         className="RandomPlanet-photo"
         style={{
-          backgroundImage: `url(${imageUrl}), url(${imgUrlDefault})`
+          backgroundImage: `url(${imageUrl}),url(${stabImageUrl})`
         }}
       />
+      
       <div className="RandomPlanet-info">
         <h1 className="display-3">{name}</h1>
 
@@ -30,7 +30,8 @@ const PlanetView = function({
             Orbital period
           </span>
           <span className="text-muted">{orbitalPeriod}</span>
-        </p>
+        </p> 
+        <ErrorGenerator />
       </div>
     </Fragment>
   );

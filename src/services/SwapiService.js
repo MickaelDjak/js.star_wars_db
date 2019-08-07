@@ -57,7 +57,13 @@ export default class SwapiService {
       population: planet.population,
       diameter: planet.diameter,
       orbitalPeriod: planet.orbital_period,
-      imageUrl: this._getImageUrl("planets", id)
+      climate: planet.climate,
+      gravity: planet.gravity,
+      rotationPeriod: planet.rotation_period,
+      surfaceWater: planet.surface_water,
+      terrain: planet.terrain,
+      imageUrl: this._getImageUrl("planets", id),
+      stabImageUrl: this._getStubImageUrl()
     };
   };
 
@@ -81,7 +87,8 @@ export default class SwapiService {
       name: starship.name,
       passengers: starship.passengers,
       starshipClass: starship.starship_class,
-      imageUrl: this._getImageUrl("starships", id)
+      imageUrl: this._getImageUrl("starships", id),
+      stabImageUrl: this._getStubImageUrl()
     };
   };
 
@@ -100,7 +107,8 @@ export default class SwapiService {
       skinColor: person.skin_color,
       created: person.created,
       edited: person.edited,
-      imageUrl: this._getImageUrl("characters", id)
+      imageUrl: this._getImageUrl("characters", id),
+      stabImageUrl: this._getStubImageUrl()
     };
   };
 
@@ -112,5 +120,9 @@ export default class SwapiService {
 
   _getImageUrl = (entityName, id) => {
     return `${this._apiImageBase}${entityName}/${id}.jpg`;
+  };
+
+  _getStubImageUrl = () => {
+    return `${this._apiImageBase}big-placeholder.jpg`;
   };
 }

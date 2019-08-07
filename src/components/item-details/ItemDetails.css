@@ -12,7 +12,10 @@
 
 .ItemDetails-image {
   width: 300px;
-  height: auto;
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .ItemDetails-info {

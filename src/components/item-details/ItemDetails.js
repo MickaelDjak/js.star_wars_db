@@ -1,66 +1,43 @@
-import React, { Component } from "react";
+import React, { Component, Children, cloneElement } from "react";
 import "./ItemDetails.css";
-import Spinner from "../spinner/spinner";
-import ItemViewer from "./ItemViewer";
-import ErrorGenerator from "../error-generator";
+import ErrorGenerator from "./../error-generator";
+import { isNull } from "util";
 
-export default class ItemDetails extends Component {
-  state = {
-    entity: {},
-    loading: false
-  };
+const DataRecord = ({ data, label, field }) => {
+  return (
+    <p key={label}>
+      <span className="RandomPlanet-term  font-weight-bold">{label}</span>
+      <span className="text-muted">{data[field]}</span>
+    </p>
+  );
+};
 
-  componentDidUpdate(prevProps) {
-    if (this.props.selectedEntityId !== prevProps.selectedEntityId) {
-      this.onUpdateEntity();
-    }
-
-    if (this.props.entityType !== prevProps.entityType) {
-      this.onChangeEntityType();
-    }
-  }
-
-  componentDidMount() {
-    this.onUpdateEntity();
-  }
-
-  onChangeEntityType = () => {
-    this.setState({
-      entity: {}
-    });
-  };
-
-  onUpdateEntity = () => {
-    const { selectedEntityId = null } = this.props;
-    if (selectedEntityId === null) {
-      return;
-    }
-
-    this.setState({ loading: true });
-
-    this.props.getOneItem(selectedEntityId).then(entity => {
-      this.setState({
-        entity: entity,
-        loading: false
-      });
-    });
-  };
-
-  render() {
-    const { entity, loading } = this.state;
-    const { renderContent } = this.props;
-
-    const content = loading ? (
-      <Spinner />
-    ) : (
-      <ItemViewer entity={entity} kayList={renderContent} />
-    );
-
+const ItemDetails = ({ data, children }) => {
+  if (JSON.stringify(data)===JSON.stringify({})) {
     return (
       <div className="ItemDetails">
-        {content}
-        <ErrorGenerator />
+        <span className="ItemDetails-empyt">Select a person from a list</span>
       </div>
     );
   }
-}
+
+  return (
+    <div className="ItemDetails">
+      <div
+        className="ItemDetails-image"
+        style={{
+          backgroundImage: `url(${data.imageUrl}),url(${data.stabImageUrl})`
+        }}
+      />
+      <div className="ItemDetails-info">
+        {Children.map(children, child => {
+          return cloneElement(child, { data: data });
+        })}
+        <ErrorGenerator />
+      </div>
+    </div>
+  );
+};
+
+export default ItemDetails;
+export { DataRecord };

@@ -49,8 +49,8 @@ export default class App extends Component {
         };
 
       case "starship":
-        return ({ name, model }) => {
-          return `${name}  (${model})`;
+        return ({ name, starshipClass }) => {
+          return `${name}  (${starshipClass})`;
         };
     }
   };
@@ -59,55 +59,51 @@ export default class App extends Component {
     switch (this.state.entityType) {
       case "people":
         return [
-          "birthYear",
-          "eyeColor",
-          "gender",
-          "hairColor",
-          "height172",
-          "mass",
-          "name",
-          "skinColor"
+          { field: "birthYear", label: "Birth year" },
+          { field: "eyeColor", label: "Eye color" },
+          { field: "gender", label: "Gender" },
+          { field: "hairColor", label: "Hair color" },
+          { field: "height", label: "Height" },
+          { field: "mass", label: "Mass" },
+          { field: "name", label: "Name" },
+          { field: "skinColor", label: "Skin color" }
         ];
 
       case "planet":
-        return ["name"];
+        return [
+          { field: "name", label: "Name" },
+          { field: "climate", label: "Climate" },
+          { field: "diameter", label: "Diameter" },
+          { field: "gravity", label: "Gravity" },
+          { field: "orbitalPeriod", label: "Orbital period" },
+          { field: "population", label: "Population" },
+          { field: "rotationPeriod", label: "Rotation period" },
+          { field: "surfaceWater", label: "Surface water" },
+          { field: "terrain", label: "Terrain" }
+        ];
 
       case "starship":
-        return ["name"];
-    }
-  };
-
-  getAllItem = () => {
-    switch (this.state.entityType) {
-      case "people":
-        return this.swapiService.getAllPeople;
-
-      case "planet":
-        return this.swapiService.getAllPlanets;
-
-      case "starship":
-        return this.swapiService.getAllStarships;
-    }
-  };
-
-  getOneItem = () => {
-    switch (this.state.entityType) {
-      case "people":
-        return this.swapiService.getPerson;
-
-      case "planet":
-        return this.swapiService.getPlanet;
-
-      case "starship":
-        return this.swapiService.getStarship;
+        return [
+          { field: "name", label: "Name" },
+          { field: "MGLT", label: "MGLT" },
+          { field: "cargoCapacity", label: "Cargo capacity" },
+          { field: "consumables", label: "Consumables" },
+          { field: "costInCredits", label: "Cost in credits" },
+          { field: "crew", label: "Crew" },
+          { field: "hyperdriveRating", label: "Hyperdrive rating" },
+          { field: "length", label: "Length" },
+          { field: "manufacturer", label: "Manufacturer" },
+          { field: "maxAtmospheringSpeed", label: "Max atmosphering speed" },
+          { field: "model", label: "Model" },
+          { field: "passengers", label: "Passengers" },
+          { field: "starshipClass", label: "Starship class" },
+        ];
     }
   };
 
   render() {
     const renderItem = this.getRenderItem();
     const renderContent = this.getRenderContent();
-    const getAllItems = this.getAllItem();
-    const getOneItem = this.getOneItem();
 
     return (
       <ErrorHandler>
@@ -138,8 +134,6 @@ export default class App extends Component {
           <ItemPage
             entityType={this.state.entityType}
             onSelect={this.onSelectEntity}
-            getAllItems={getAllItems}
-            getOneItem={getOneItem}
             selectedEntityId={this.state.selectedEntityId}
             renderItem={renderItem}
             renderContent={renderContent}

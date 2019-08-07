@@ -14,12 +14,20 @@
   color: #ffeb3b;
 }
 
-
 .ErrorIndicator img {
-    width: 150px;
-    margin: 25px 0;
-  }
-  
+  width: 150px;
+  margin: 25px 0;
+}
+
+.ErrorIndicator button {
+  background: #ffeb3b;
+  color: black;
+  transition: all 500ms;
+}
+.ErrorIndicator button:hover {
+  background: transparent;
+  color: #ffeb3b;
+}
 
 @keyframes bounce-in-fwd {
   0% {
