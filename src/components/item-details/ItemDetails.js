@@ -1,7 +1,6 @@
-import React, { Component, Children, cloneElement } from "react";
+import React, { Children, cloneElement } from "react";
 import "./ItemDetails.css";
 import ErrorGenerator from "./../error-generator";
-import { isNull } from "util";
 
 const DataRecord = ({ data, label, field }) => {
   return (
@@ -13,7 +12,7 @@ const DataRecord = ({ data, label, field }) => {
 };
 
 const ItemDetails = ({ data, children }) => {
-  if (JSON.stringify(data)===JSON.stringify({})) {
+  if (JSON.stringify(data) === JSON.stringify({})) {
     return (
       <div className="ItemDetails">
         <span className="ItemDetails-empyt">Select a person from a list</span>

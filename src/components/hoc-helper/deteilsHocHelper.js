@@ -10,7 +10,7 @@ const deteilsHocHelper = (View, getData) => {
     };
 
     componentDidUpdate(prevProps) {
-      if (this.props.selectedEntityId !== prevProps.selectedEntityId) {
+      if (this.props.itemId !== prevProps.itemId) {
         this.onUpdateEntity();
       }
 
@@ -30,14 +30,14 @@ const deteilsHocHelper = (View, getData) => {
     };
 
     onUpdateEntity = () => {
-      const { selectedEntityId = null } = this.props;
-      if (selectedEntityId === null) {
+      const { itemId = null } = this.props;
+      if (itemId === null) {
         return;
       }
 
       this.setState({ loading: true });
 
-      getData(selectedEntityId).then(data => {
+      getData(itemId).then(data => {
         this.setState({
           data: data,
           loading: false

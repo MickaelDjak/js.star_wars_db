@@ -1,11 +1,42 @@
+import React from "react";
 import SwapiService from "../../services/SwapiService";
 import { deteilsHocHelper } from "./../hoc-helper";
-import ItemDetails from "./../item-details";
+import ItemDetails, { DataRecord } from "./../item-details";
+import {
+  personDetail,
+  planetDetail,
+  starshipDatails
+} from "../../services/RenderDetailsFields";
 
 const { getPerson, getPlanet, getStarship } = new SwapiService();
 
-const PersonDetails = deteilsHocHelper(ItemDetails, getPerson);
-const PlanetDetails = deteilsHocHelper(ItemDetails, getPlanet);
-const StarshipDetails = deteilsHocHelper(ItemDetails, getStarship);
+const withRenderedRecords = (Wrapper, fields) => {
+  return props => {
+    return (
+      <Wrapper {...props}>
+        {fields.map(el => {
+          return (
+            <DataRecord key={el.field} label={el.label} field={el.field} />
+          );
+        })}
+      </Wrapper>
+    );
+  };
+};
+
+const PersonDetails = deteilsHocHelper(
+  withRenderedRecords(ItemDetails, personDetail),
+  getPerson
+);
+
+const PlanetDetails = deteilsHocHelper(
+  withRenderedRecords(ItemDetails, planetDetail),
+  getPlanet
+);
+
+const StarshipDetails = deteilsHocHelper(
+  withRenderedRecords(ItemDetails, starshipDatails),
+  getStarship
+);
 
 export { PersonDetails, PlanetDetails, StarshipDetails };
