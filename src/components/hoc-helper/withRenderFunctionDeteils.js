@@ -5,7 +5,7 @@ const withRenderFunctionDeteils = (Wrapper, fields) => {
   return props => {
     return (
       <Wrapper {...props}>
-        {fields.map(el => {
+        {props.renderDetails.map(el => {
           return (
             <DataRecord key={el.field} label={el.label} field={el.field} />
           );

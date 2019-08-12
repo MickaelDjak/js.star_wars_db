@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../spinner/spinner";
 import ErrorHandler from "../error-handler/ErrorHandler";
 
-const withNetworkHandlingDeteils  = (View, getData) => {
+const withNetworkHandlingDeteils  = (View) => {
   return class extends Component {
     state = {
       data: {},
@@ -37,7 +37,7 @@ const withNetworkHandlingDeteils  = (View, getData) => {
 
       this.setState({ loading: true });
 
-      getData(itemId).then(data => {
+      this.props.getData(itemId).then(data => {
         this.setState({
           data: data,
           loading: false

@@ -6,10 +6,8 @@ import {
 } from "./../hoc-helper";
 
 const HocedItemList = props => {
-  const { getData, renderList } = props;
   const InnerOne = withNetworkHandlingListItem(
-    withRenderFunctionListItem(ItemList, renderList),
-    getData
+    withRenderFunctionListItem(ItemList)
   );
 
   return <InnerOne {...props} />;

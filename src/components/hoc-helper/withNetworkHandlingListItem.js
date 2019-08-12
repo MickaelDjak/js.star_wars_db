@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../spinner/spinner";
 import ErrorHandler from "../error-handler/ErrorHandler";
 
-const withNetworkHandlingListItem  = (View, getData) => {
+const withNetworkHandlingListItem  = (View) => {
   return class extends Component {
     state = {
       data: [],

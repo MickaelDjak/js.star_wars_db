@@ -5,13 +5,12 @@ import {
   withRenderFunctionDeteils
 } from "./../hoc-helper";
 
-const HocedItemDetails = ({ getData, renderDetails, ...rest }) => {
+const HocedItemDetails = (props) => {
   const InnerOne = withNetworkHandlingDeteils(
-    withRenderFunctionDeteils(ItemDetails, renderDetails),
-    getData
+    withRenderFunctionDeteils(ItemDetails),
   );
 
-  return <InnerOne {...rest} />;
+  return <InnerOne {...props} />;
 };
 
 export default HocedItemDetails;
