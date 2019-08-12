@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../spinner/spinner";
 import ErrorHandler from "../error-handler/ErrorHandler";
 
-const deteilsHocHelper = (View, getData) => {
+const withNetworkHandlingDeteils  = (View, getData) => {
   return class extends Component {
     state = {
       data: {},
@@ -60,4 +60,4 @@ const deteilsHocHelper = (View, getData) => {
   };
 };
 
-export default deteilsHocHelper;
+export default withNetworkHandlingDeteils;

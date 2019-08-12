@@ -1,13 +1,15 @@
-const renderPerson = ({ name, gender, birthYear }) => {
-  return `${name}  (${gender}, ${birthYear})`;
+const renderItems = {
+  renderPerson({ name, gender, birthYear }) {
+    return `${name}  (${gender}, ${birthYear})`;
+  },
+
+  renderPlanet({ name, diameter }) {
+    return `${name}  (${diameter})`;
+  },
+
+  renderStarship({ name, starshipClass }) {
+    return `${name}  (${starshipClass})`;
+  }
 };
 
-const renderPlanet = ({ name, diameter }) => {
-  return `${name}  (${diameter})`;
-};
-
-const renderStarship = ({ name, starshipClass }) => {
-  return `${name}  (${starshipClass})`;
-};
-
-export { renderPerson, renderPlanet, renderStarship };
+export default renderItems;

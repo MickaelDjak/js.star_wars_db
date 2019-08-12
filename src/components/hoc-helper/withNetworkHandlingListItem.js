@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../spinner/spinner";
 import ErrorHandler from "../error-handler/ErrorHandler";
 
-const itemListHocHelper = (View, getData) => {
+const withNetworkHandlingListItem  = (View, getData) => {
   return class extends Component {
     state = {
       data: [],
@@ -10,7 +10,8 @@ const itemListHocHelper = (View, getData) => {
     };
 
     componentDidMount() {
-      getData().then(this.onData);
+      console.log(this);
+      this.props.getData().then(this.onData);
     }
 
     componentDidUpdate(prevProps) {
@@ -18,7 +19,7 @@ const itemListHocHelper = (View, getData) => {
         this.setState({
           loading: true
         });
-        getData().then(this.onData);
+        this.props.getData().then(this.onData);
       }
     }
 
@@ -45,4 +46,4 @@ const itemListHocHelper = (View, getData) => {
   };
 };
 
-export default itemListHocHelper;
+export default withNetworkHandlingListItem;

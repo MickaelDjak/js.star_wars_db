@@ -1,4 +1,13 @@
-import itemListHocHelper from "./itemListHocHelper";
-import deteilsHocHelper from "./deteilsHocHelper";
+import withNetworkHandlingListItem from "./withNetworkHandlingListItem";
+import withNetworkHandlingDeteils from "./withNetworkHandlingDeteils";
+import withRenderFunctionDeteils from "./withRenderFunctionDeteils";
+import withRenderFunctionListItem from "./withRenderFunctionListItem";
+import withSwapiService from "./withSwapiService";
 
-export { itemListHocHelper, deteilsHocHelper };
+export {
+  withNetworkHandlingListItem,
+  withNetworkHandlingDeteils,
+  withRenderFunctionDeteils,
+  withRenderFunctionListItem,
+  withSwapiService
+};

@@ -5,7 +5,9 @@ import RandomPlanet from "./../random-planet";
 import ItemPage from "../item-page";
 import SwapiService from "../../services/SwapiService";
 import ErrorHandler from "../error-handler/ErrorHandler";
-
+import { SwapiServiceProvider } from "./../swapi-service-context";
+import itemDetails from "../../services/RenderDetailsFields";
+import renderItems from "../../services/RenderListItems";
 export default class App extends Component {
   swapiService = new SwapiService();
 
@@ -39,36 +41,44 @@ export default class App extends Component {
   render() {
     return (
       <ErrorHandler>
-        <div className="App container">
-          <div className="row">
-            <div className="col-12">
-              <Header selectEntityType={this.selectEntityType} />
+        <SwapiServiceProvider
+          value={{
+            swapiService: this.swapiService,
+            itemDetails: itemDetails,
+            renderItems: renderItems
+          }}
+        >
+          <div className="App container">
+            <div className="row">
+              <div className="col-12">
+                <Header selectEntityType={this.selectEntityType} />
+              </div>
             </div>
-          </div>
 
-          <div className="row">
-            <div className="col-12">
-              {this.state.showRandomPlanet ? <RandomPlanet /> : null}
+            <div className="row">
+              <div className="col-12">
+                {this.state.showRandomPlanet ? <RandomPlanet /> : null}
+              </div>
             </div>
-          </div>
 
-          <div className="row justify-content-end">
-            <div className="col-3">
-              <span
-                className="btn RandomPlanet-triger"
-                onClick={() => this.toggleShowRandomPlanet()}
-              >
-                {this.state.showRandomPlanet ? "Hide" : "Show"} random planet
-              </span>
+            <div className="row justify-content-end">
+              <div className="col-3">
+                <span
+                  className="btn RandomPlanet-triger"
+                  onClick={() => this.toggleShowRandomPlanet()}
+                >
+                  {this.state.showRandomPlanet ? "Hide" : "Show"} random planet
+                </span>
+              </div>
             </div>
-          </div>
 
-          <ItemPage
-            entityType={this.state.entityType}
-            onSelect={this.onSelectEntity}
-            itemId={this.state.itemId}
-          />
-        </div>
+            <ItemPage
+              entityType={this.state.entityType}
+              onSelect={this.onSelectEntity}
+              itemId={this.state.itemId}
+            />
+          </div>
+        </SwapiServiceProvider>
       </ErrorHandler>
     );
   }
