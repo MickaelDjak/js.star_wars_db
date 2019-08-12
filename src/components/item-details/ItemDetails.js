@@ -39,4 +39,5 @@ const ItemDetails = ({ data, children }) => {
 };
 
 export default ItemDetails;
+
 export { DataRecord };

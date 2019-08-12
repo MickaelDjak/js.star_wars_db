@@ -1,6 +1,6 @@
 import React from "react";
 
-const withRenderFunctionListItem = (Wrapper) => {
+const withRenderFunctionListItem = Wrapper => {
   return props => {
     return <Wrapper {...props}>{props.renderList}</Wrapper>;
   };

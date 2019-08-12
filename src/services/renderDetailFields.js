@@ -1,4 +1,4 @@
-const itemDetails = {
+const renderDetailFields = {
   personDetail: [
     { field: "birthYear", label: "Birth year" },
     { field: "eyeColor", label: "Eye color" },
@@ -38,4 +38,4 @@ const itemDetails = {
   ]
 };
 
-export default itemDetails;
+export default renderDetailFields;

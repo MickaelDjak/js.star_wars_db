@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../spinner/spinner";
 import ErrorHandler from "../error-handler/ErrorHandler";
 
-const withNetworkHandlingDeteils  = (View) => {
+const withNetworkHandlingDeteils = View => {
   return class extends Component {
     state = {
       data: {},
@@ -10,12 +10,11 @@ const withNetworkHandlingDeteils  = (View) => {
     };
 
     componentDidUpdate(prevProps) {
-      if (this.props.itemId !== prevProps.itemId) {
+      if (
+        this.props.itemId !== prevProps.itemId ||
+        this.props.getData !== prevProps.getData
+      ) {
         this.onUpdateEntity();
-      }
-
-      if (this.props.entityType !== prevProps.entityType) {
-        this.onChangeEntityType();
       }
     }
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import './ItemList.css';
+import React from "react";
+import "./ItemList.css";
 
 const ItemList = ({ data, onSelect, children: renderLable }) => {
   return (

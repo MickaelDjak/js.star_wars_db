@@ -1,14 +1,11 @@
 .RandomPlanet {
   background: #212121;
-
   border-radius: 0.3rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-}
-.RandomPlanet-triger {
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
 }
 
 .RandomPlanet-info p {

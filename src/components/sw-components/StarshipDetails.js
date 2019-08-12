@@ -1,5 +1,10 @@
-import HocedItemDetails from "./HocedItemDetails";
-import { withSwapiService } from "./../hoc-helper";
+import ItemDetails from "./../item-details";
+import compose from "./../../services/compose";
+import {
+  withSwapiService,
+  withNetworkHandlingDeteils,
+  withRenderDeteils
+} from "./../hoc-helper";
 
 const mapMethodsToProps = ({ swapiService, itemDetails }) => {
   return {
@@ -8,4 +13,8 @@ const mapMethodsToProps = ({ swapiService, itemDetails }) => {
   };
 };
 
-export default withSwapiService(HocedItemDetails, mapMethodsToProps);
+export default compose(
+  withSwapiService(mapMethodsToProps),
+  withNetworkHandlingDeteils,
+  withRenderDeteils
+)(ItemDetails);

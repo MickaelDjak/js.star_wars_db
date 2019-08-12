@@ -1,4 +1,4 @@
-const renderItems = {
+const renderListItems = {
   renderPerson({ name, gender, birthYear }) {
     return `${name}  (${gender}, ${birthYear})`;
   },
@@ -12,4 +12,4 @@ const renderItems = {
   }
 };
 
-export default renderItems;
+export default renderListItems;

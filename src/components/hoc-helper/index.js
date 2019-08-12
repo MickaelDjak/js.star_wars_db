@@ -1,13 +1,13 @@
 import withNetworkHandlingListItem from "./withNetworkHandlingListItem";
 import withNetworkHandlingDeteils from "./withNetworkHandlingDeteils";
-import withRenderFunctionDeteils from "./withRenderFunctionDeteils";
-import withRenderFunctionListItem from "./withRenderFunctionListItem";
+import withRenderDeteils from "./withRenderDeteils";
+import withRenderListItem from "./withRenderListItem";
 import withSwapiService from "./withSwapiService";
 
 export {
   withNetworkHandlingListItem,
   withNetworkHandlingDeteils,
-  withRenderFunctionDeteils,
-  withRenderFunctionListItem,
+  withRenderDeteils,
+  withRenderListItem,
   withSwapiService
 };

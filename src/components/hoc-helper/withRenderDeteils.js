@@ -1,7 +1,7 @@
 import React from "react";
 import { DataRecord } from "./../item-details";
 
-const withRenderFunctionDeteils = (Wrapper, fields) => {
+const withRenderFunctionDeteils = Wrapper => {
   return props => {
     return (
       <Wrapper {...props}>

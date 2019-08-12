@@ -53,10 +53,14 @@ export default class RandomPlanet extends Component {
   render() {
     const { planet, loading } = this.state;
     return (
-      <div className="RandomPlanet">
-        <ErrorHandler>
-          {loading ? <Spinner /> : <PlanetView planet={planet} />}
-        </ErrorHandler>
+      <div className="row">
+        <div className="col-12">
+          <div className="RandomPlanet">
+            <ErrorHandler>
+              {loading ? <Spinner /> : <PlanetView planet={planet} />}
+            </ErrorHandler>
+          </div>
+        </div>
       </div>
     );
   }

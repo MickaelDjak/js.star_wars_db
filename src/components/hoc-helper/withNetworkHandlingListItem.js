@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../spinner/spinner";
 import ErrorHandler from "../error-handler/ErrorHandler";
 
-const withNetworkHandlingListItem  = (View) => {
+const withNetworkHandlingListItem = View => {
   return class extends Component {
     state = {
       data: [],
@@ -10,20 +10,17 @@ const withNetworkHandlingListItem  = (View) => {
     };
 
     componentDidMount() {
-      console.log(this);
-      this.props.getData().then(this.onData);
+      this.props.getData().then(this.setData);
     }
 
     componentDidUpdate(prevProps) {
-      if (this.props.entityType !== prevProps.entityType) {
-        this.setState({
-          loading: true
-        });
-        this.props.getData().then(this.onData);
+      if (this.props.getData !== prevProps.getData) {
+        this.setState({ loading: true });
+        this.props.getData().then(this.setData);
       }
     }
 
-    onData = data => {
+    setData = data => {
       this.setState({
         data: data,
         loading: false
