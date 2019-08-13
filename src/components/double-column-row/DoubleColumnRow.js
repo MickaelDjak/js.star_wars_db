@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const DoubleColumnRow = ({ left, right }) => {
   return (
@@ -7,6 +8,11 @@ const DoubleColumnRow = ({ left, right }) => {
       <div className="col-9">{right}</div>
     </div>
   );
+};
+
+DoubleColumnRow.propTypes = {
+  left: PropTypes.node,
+  right: PropTypes.node
 };
 
 export default DoubleColumnRow;

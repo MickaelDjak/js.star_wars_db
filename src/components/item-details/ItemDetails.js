@@ -1,4 +1,5 @@
 import React, { Children, cloneElement } from "react";
+import PropTypes from "prop-types";
 import "./ItemDetails.css";
 import ErrorGenerator from "./../error-generator";
 
@@ -9,6 +10,12 @@ const DataRecord = ({ data, label, field }) => {
       <span className="text-muted">{data[field]}</span>
     </p>
   );
+};
+
+DataRecord.propTypes = {
+  data: PropTypes.array,
+  label: PropTypes.string,
+  field: PropTypes.string
 };
 
 const ItemDetails = ({ data, children }) => {
@@ -36,6 +43,11 @@ const ItemDetails = ({ data, children }) => {
       </div>
     </div>
   );
+};
+
+ItemDetails.propTypes = {
+  data: PropTypes.object,
+  children: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default ItemDetails;
