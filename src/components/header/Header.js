@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 export default class Header extends Component {
@@ -7,11 +8,19 @@ export default class Header extends Component {
       <div className="row">
         <div className="col-12">
           <div className="Header ">
-            <div className="Header-logo">Star wars DB</div>
+            <div className="Header-logo">
+              <Link to="/">Star wars DB</Link>
+            </div>
             <div className="Header-navigation nav">
-              <button className="nav-itemnav-link active">People</button>
-              <button className="nav-item nav-link">Planets</button>
-              <button className="nav-item nav-link">Starship</button>
+              <Link className="nav-item nav-link" to="/people/">
+                People
+              </Link>
+              <Link className="nav-item nav-link" to="/starships/">
+                Starship
+              </Link>
+              <Link className="nav-item nav-link" to="/planets/">
+                Planets
+              </Link>
             </div>
           </div>
         </div>

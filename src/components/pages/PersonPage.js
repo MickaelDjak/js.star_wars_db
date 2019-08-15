@@ -1,29 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import ErrorHandler from "../error-handler/ErrorHandler";
-import DoubleColumnRow from "../double-column-row/DoubleColumnRow";
-import { PersonList, PersonDetails } from "./../sw-components";
+import { PersonList } from "./../sw-components";
+import { withRouter } from "react-router-dom";
 
-export default class PersonPage extends Component {
-  state = {
-    itemId: null
-  };
+const PersonPage = ({ history }) => {
+  return (
+    <div>
+      <ErrorHandler>
+        <PersonList
+          onSelect={itemid => {
+            history.push(itemid);
+          }}
+        />
+      </ErrorHandler>
+    </div>
+  );
+};
 
-  onSelectItem = id => {
-    this.setState({
-      itemId: id
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <ErrorHandler>
-          <DoubleColumnRow
-            left={<PersonList onSelect={this.onSelectItem} />}
-            right={<PersonDetails itemId={this.state.itemId} />}
-          />
-        </ErrorHandler>
-      </div>
-    );
-  }
-}
+export default withRouter(PersonPage);

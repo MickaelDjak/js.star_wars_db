@@ -1,29 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import ErrorHandler from "../error-handler/ErrorHandler";
-import DoubleColumnRow from "../double-column-row/DoubleColumnRow";
-import { PlanetList, PlanetDetails } from "./../sw-components";
+import { PlanetList } from "./../sw-components";
+import { withRouter } from "react-router-dom";
 
-export default class PlanetPage extends Component {
-  state = {
-    itemId: null
-  };
+const PlanetPage = ({ history }) => {
+  return (
+    <div>
+      <ErrorHandler>
+        <PlanetList
+          onSelect={itemId => {
+            history.push(itemId);
+          }}
+        />
+      </ErrorHandler>
+    </div>
+  );
+};
 
-  onSelectItem = id => {
-    this.setState({
-      itemId: id
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <ErrorHandler>
-          <DoubleColumnRow
-            left={<PlanetList onSelect={this.onSelectItem} />}
-            right={<PlanetDetails itemId={this.state.itemId} />}
-          />
-        </ErrorHandler>
-      </div>
-    );
-  }
-}
+export default withRouter(PlanetPage);

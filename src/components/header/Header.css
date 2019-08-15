@@ -5,11 +5,12 @@
   align-items: center;
 }
 
-.Header-logo {
+.Header-logo > a {
   font-size: 2em;
   margin-right: 50px;
   font-family: "Star Jedi", arial;
   color: #000000;
+  text-decoration: none;
   text-shadow: -0 -1px 0 #ffeb3b, 0 -1px 0 #ffeb3b, -0 1px 0 #ffeb3b,
     0 1px 0 #ffeb3b, -1px -0 0 #ffeb3b, 1px -0 0 #ffeb3b, -1px 0 0 #ffeb3b,
     1px 0 0 #ffeb3b, -1px -1px 0 #ffeb3b, 1px -1px 0 #ffeb3b, -1px 1px 0 #ffeb3b,
@@ -17,7 +18,7 @@
     -1px 1px 0 #ffeb3b, 1px 1px 0 #ffeb3b;
 }
 
-.Header-navigation > button {
+.Header-navigation > a {
   color: #ffeb3b;
   border: 1px solid transparent;
   background: transparent;
@@ -25,9 +26,10 @@
   width: 100px;
   font-weight: 700;
   transition: all 500ms;
+  text-align: center;
 }
 
-.Header-navigation > button:hover {
+.Header-navigation > a:hover {
   border-top: 1px solid #ffeb3b;
   border-bottom: 1px solid #ffeb3b;
   transform: scale(1.2);

@@ -1,29 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import ErrorHandler from "../error-handler/ErrorHandler";
-import DoubleColumnRow from "../double-column-row/DoubleColumnRow";
-import { StarshipList, StarshipDetails } from "./../sw-components";
+import { StarshipList } from "./../sw-components";
+import { withRouter } from "react-router-dom";
 
-export default class PlanetPage extends Component {
-  state = {
-    itemId: null
-  };
+const StarshipPage = ({ history }) => {
+  return (
+    <div>
+      <ErrorHandler>
+        <StarshipList
+          onSelect={itemId => {
+            history.push(itemId);
+          }}
+        />
+      </ErrorHandler>
+    </div>
+  );
+};
 
-  onSelectItem = id => {
-    this.setState({
-      itemId: id
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <ErrorHandler>
-          <DoubleColumnRow
-            left={<StarshipList onSelect={this.onSelectItem} />}
-            right={<StarshipDetails itemId={this.state.itemId} />}
-          />
-        </ErrorHandler>
-      </div>
-    );
-  }
-}
+export default withRouter(StarshipPage);
