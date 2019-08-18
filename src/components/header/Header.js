@@ -21,6 +21,12 @@ export default class Header extends Component {
               <Link className="nav-item nav-link" to="/planets/">
                 Planets
               </Link>
+              <Link className="nav-item nav-link" to="/login">
+                Login
+              </Link>
+              <Link className="nav-item nav-link" to="/secret">
+                Secret
+              </Link>
             </div>
           </div>
         </div>

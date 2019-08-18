@@ -1,37 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { AsList, AsCardColumns } from "./ListFactory";
 import "./ItemList.css";
 
-const ItemList = ({ data, onSelect, children: renderLable }) => {
-  return (
-    <div className="card mb-3">
-      <ul className="list-group list-group-flush">
-        {data.map(({ id, ...data }) => {
-          return (
-            <li
-              key={id}
-              className="list-group-item"
-              onClick={() => {
-                onSelect(id);
-              }}
-            >
-              {renderLable(data)}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+const ItemList = props => {
+  const { like } = props;
+  console.log(like);
+  if (like === "list") {
+    return <AsList {...props} />;
+  }
+
+  if (like === "card") {
+    return <AsCardColumns {...props} />;
+  }
 };
 
 ItemList.defaultProps = {
-  onSelect: () => {}
+  onSelect: () => {},
+  like: "list"
 };
 
 ItemList.propTypes = {
   onSelect: PropTypes.func,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  children: PropTypes.func.isRequired
+  children: PropTypes.func.isRequired,
+  like: PropTypes.string
 };
 
 export default ItemList;

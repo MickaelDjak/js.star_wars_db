@@ -11,6 +11,7 @@ const PlanetPage = ({ history }) => {
           onSelect={itemId => {
             history.push(itemId);
           }}
+          like='card'
         />
       </ErrorHandler>
     </div>

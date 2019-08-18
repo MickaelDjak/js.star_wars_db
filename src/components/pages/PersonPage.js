@@ -11,6 +11,7 @@ const PersonPage = ({ history }) => {
           onSelect={itemid => {
             history.push(itemid);
           }}
+          like="card"
         />
       </ErrorHandler>
     </div>
